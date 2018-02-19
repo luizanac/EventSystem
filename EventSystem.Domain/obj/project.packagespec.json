@@ -1,0 +1,51 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "/home/laz/Trabalho/EventSystem/EventSystem.Domain/EventSystem.Domain.csproj",
+    "projectName": "EventSystem.Domain",
+    "projectPath": "/home/laz/Trabalho/EventSystem/EventSystem.Domain/EventSystem.Domain.csproj",
+    "outputPath": "/home/laz/Trabalho/EventSystem/EventSystem.Domain/obj/",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netstandard2.0"
+    ],
+    "frameworks": {
+      "netstandard2.0": {
+        "projectReferences": {
+          "/home/laz/Trabalho/EventSystem/EventSystem.Shared/EventSystem.Shared.csproj": {
+            "projectPath": "/home/laz/Trabalho/EventSystem/EventSystem.Shared/EventSystem.Shared.csproj"
+          }
+        }
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netstandard2.0": {
+      "dependencies": {
+        "Microsoft.Extensions.Logging": {
+          "target": "Package",
+          "version": "[2.0.0, )"
+        },
+        "NETStandard.Library": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.0.1, )",
+          "autoReferenced": true
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}

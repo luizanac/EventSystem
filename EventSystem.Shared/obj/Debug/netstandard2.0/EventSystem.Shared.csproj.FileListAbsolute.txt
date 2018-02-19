@@ -1,0 +1,16 @@
+/home/laz/Trabalho/EventSystem/EventSystem.Shared/bin/Debug/netstandard2.0/EventSystem.Shared.deps.json
+/home/laz/Trabalho/EventSystem/EventSystem.Shared/bin/Debug/netstandard2.0/EventSystem.Shared.dll
+/home/laz/Trabalho/EventSystem/EventSystem.Shared/bin/Debug/netstandard2.0/EventSystem.Shared.pdb
+/home/laz/Trabalho/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.csproj.CoreCompileInputs.cache
+/home/laz/Trabalho/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.AssemblyInfoInputs.cache
+/home/laz/Trabalho/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.AssemblyInfo.cs
+/home/laz/Trabalho/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.dll
+/home/laz/Trabalho/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.pdb
+/home/laz/Trabalho/fast2p/EventSystem/EventSystem.Shared/bin/Debug/netstandard2.0/EventSystem.Shared.deps.json
+/home/laz/Trabalho/fast2p/EventSystem/EventSystem.Shared/bin/Debug/netstandard2.0/EventSystem.Shared.dll
+/home/laz/Trabalho/fast2p/EventSystem/EventSystem.Shared/bin/Debug/netstandard2.0/EventSystem.Shared.pdb
+/home/laz/Trabalho/fast2p/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.csproj.CoreCompileInputs.cache
+/home/laz/Trabalho/fast2p/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.AssemblyInfoInputs.cache
+/home/laz/Trabalho/fast2p/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.AssemblyInfo.cs
+/home/laz/Trabalho/fast2p/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.dll
+/home/laz/Trabalho/fast2p/EventSystem/EventSystem.Shared/obj/Debug/netstandard2.0/EventSystem.Shared.pdb

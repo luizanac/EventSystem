@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.Rider2017.3/system/resharper-host/local/Transient/ReSharperHost/v11/SolutionCaches/_EventSystem.144988074.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="EventSystem.Api" t="IncludeRecursive">
+        <e p="Controllers" t="Include">
+          <e p="AuthController.cs" t="Include" />
+          <e p="EventAdministratorController.cs" t="Include" />
+        </e>
+        <e p="EventSystem.Api.csproj" t="IncludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Startup.cs" t="Include" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.0" t="Include">
+              <e p="EventSystem.Api.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="wwwroot" t="Include" />
+      </e>
+      <e p="EventSystem.Domain" t="IncludeRecursive">
+        <e p="Commands" t="Include">
+          <e p="EventAdministratorCommands" t="Include">
+            <e p="Input" t="Include">
+              <e p="CreateEventAdministratorCommand.cs" t="Include" />
+            </e>
+            <e p="Output" t="Include">
+              <e p="CreateEventAdministratorCommandResult.cs" t="Include" />
+            </e>
+          </e>
+          <e p="PointOfSaleCommands" t="Include">
+            <e p="Input" t="Include" />
+            <e p="Output" t="Include" />
+          </e>
+          <e p="UserCommands" t="Include">
+            <e p="Inputs" t="Include">
+              <e p="ChangeUserPasswordCommand.cs" t="Include" />
+              <e p="InfoUserCommand.cs" t="Include" />
+              <e p="LoginUserCommand.cs" t="Include" />
+            </e>
+            <e p="Outputs" t="Include">
+              <e p="ChangeUserPasswordCommandResult.cs" t="Include" />
+              <e p="InfoUserCommandResult.cs" t="Include" />
+              <e p="LoginUserCommandResult.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Entities" t="Include">
+          <e p="Administrator.cs" t="Include" />
+          <e p="Event.cs" t="Include" />
+          <e p="EventAdministrator.cs" t="Include" />
+          <e p="PointOfSale.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+          <e p="UserEvent.cs" t="Include" />
+        </e>
+        <e p="EventSystem.Domain.csproj" t="IncludeRecursive" />
+        <e p="Handlers" t="Include">
+          <e p="EventAdministratorHandler.cs" t="Include" />
+          <e p="Handler.cs" t="Include" />
+          <e p="UserHandler.cs" t="Include" />
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="IEventAdministratorRepository.cs" t="Include" />
+          <e p="IPointOfSaleRepository.cs" t="Include" />
+          <e p="IUserRepository.cs" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="IJwtService.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="EventSystem.Domain.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="EventSystem.Infra" t="IncludeRecursive">
+        <e p="AppDbContext.cs" t="Include" />
+        <e p="Er" t="Include">
+          <e p="EventSystemEr.mwb" t="Include" />
+        </e>
+        <e p="EventSystem.Infra.csproj" t="IncludeRecursive" />
+        <e p="Repositories" t="Include">
+          <e p="EventAdministratorRepository.cs" t="Include" />
+          <e p="UserRepository.cs" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="JwtService.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="EventSystem.Infra.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="EventSystem.Shared" t="IncludeRecursive">
+        <e p="Commands" t="Include">
+          <e p="ICommand.cs" t="Include" />
+          <e p="ICommandHandler.cs" t="Include" />
+          <e p="ICommandResult.cs" t="Include" />
+        </e>
+        <e p="Entities" t="Include">
+          <e p="Entity.cs" t="Include" />
+        </e>
+        <e p="EventSystem.Shared.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="EventSystem.Shared.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="EventSystem.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>

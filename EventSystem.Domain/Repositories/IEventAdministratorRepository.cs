@@ -5,11 +5,7 @@ using EventSystem.Domain.Entities;
 
 namespace EventSystem.Domain.Repositories
 {
-	public interface IEventAdministratorRepository
+	public interface IEventAdministratorRepository : IRepository<EventAdministrator>
 	{
-		Task<EventAdministrator> GetById(Guid id);
-		Task<IList<EventAdministrator>> GetAll();
-		Task Create(EventAdministrator eventAdministrator);
-		Task Commit();
 	}
 }

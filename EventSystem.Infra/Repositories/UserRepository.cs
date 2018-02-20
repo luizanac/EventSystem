@@ -8,14 +8,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventSystem.Infra.Repositories
 {
-	public class UserRepository : IUserRepository
+	public class UserRepository : Repository<User>,IUserRepository
 	{
-		private readonly AppDbContext _dbContext;
+	/*	private readonly AppDbContext _dbContext;
 
 		public UserRepository(AppDbContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
+		
+		public async Task<User> GetById(Guid id)
+		{
+			return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
+		}
+		
+		public async Task Commit()
+		{
+			await _dbContext.SaveChangesAsync();
+		}*/
+		
+		
+		public UserRepository(AppDbContext dbContext) : base(dbContext)
+		{}
 		
 		public async Task<User> GetUserByEmailAndPassword(string email, string password)
 		{
@@ -23,28 +37,24 @@ namespace EventSystem.Infra.Repositories
 			var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
 			var passwordHashed = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
 			
-			return await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == email && u.Password == passwordHashed);
+			return await DbSet.SingleOrDefaultAsync(u => u.Email == email && u.Password == passwordHashed);
 		}
 
 		public async Task<User> GetUserByEmail(string email)
 		{
-			return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+			return await DbSet.FirstOrDefaultAsync(u => u.Email == email);
 		}
-
-		public async Task<User> GetById(Guid id)
-		{
-			return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
-		}
-
+		
 		public async Task Disable(Guid id)
 		{
 			var user = await GetById(id);
 			user.IsDisabled = true;
 		}
 
-		public async Task Commit()
+		public async Task Enable(Guid id)
 		{
-			await _dbContext.SaveChangesAsync();
+			var user = await GetById(id);
+			user.IsDisabled = false;
 		}
 	}
 }

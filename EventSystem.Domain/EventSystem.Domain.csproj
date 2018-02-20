@@ -23,10 +23,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\PointOfSaleCommands\Input" />
-    <Folder Include="Commands\PointOfSaleCommands\Output" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
   </ItemGroup>
 </Project>

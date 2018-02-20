@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using EventSystem.Shared.Entities;
 using Flunt.Notifications;
+using Flunt.Validations;
 using Newtonsoft.Json;
 
 namespace EventSystem.Domain.Entities
@@ -22,6 +23,16 @@ namespace EventSystem.Domain.Entities
 			var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
 			var passwordHashed = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
 			Password = passwordHashed;
+			
+			AddNotifications(new Contract()
+				.Requires()
+				.IsNotNullOrEmpty(password, "password", "A senha não pode ser vazia")
+				.HasMinLen(password, 6, "password", "A senha não pode ter menos que 6 caracteres")
+				.IsEmail(Email, "email", "O E-mail deve ser em um formato válido")
+				.HasMinLen(Name, 3,"name", "O nome de usuário deve ter no minimo 3 caracteres")
+				.HasMaxLen(Name, 45,"name", "O nome de usuário deve ter no máximo 45 caracteres")
+				.IsNotNullOrEmpty(Name, "name", "O nome de usuário não pode ser vazio")
+			);
 		}
 		
 		public string Name { get; set; }

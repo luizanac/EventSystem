@@ -8,10 +8,12 @@ namespace EventSystem.Infra
 	{
 		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
 		{}
-
+		
+		
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Ignore<Notifiable>();
+			modelBuilder.Ignore<Notification>();
 		}
 
 		public DbSet<User> Users { get; set; }

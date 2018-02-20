@@ -7,6 +7,7 @@
         <e p="Controllers" t="Include">
           <e p="AuthController.cs" t="Include" />
           <e p="EventAdministratorController.cs" t="Include" />
+          <e p="PointOfSaleController.cs" t="Include" />
         </e>
         <e p="EventSystem.Api.csproj" t="IncludeRecursive" />
         <e p="Program.cs" t="Include" />
@@ -34,8 +35,12 @@
             </e>
           </e>
           <e p="PointOfSaleCommands" t="Include">
-            <e p="Input" t="Include" />
-            <e p="Output" t="Include" />
+            <e p="Input" t="Include">
+              <e p="CreatePointOfSaleCommand.cs" t="Include" />
+            </e>
+            <e p="Output" t="Include">
+              <e p="CreatePointOfSaleCommandResult.cs" t="Include" />
+            </e>
           </e>
           <e p="UserCommands" t="Include">
             <e p="Inputs" t="Include">
@@ -62,11 +67,13 @@
         <e p="Handlers" t="Include">
           <e p="EventAdministratorHandler.cs" t="Include" />
           <e p="Handler.cs" t="Include" />
+          <e p="PointOfSaleHandler.cs" t="Include" />
           <e p="UserHandler.cs" t="Include" />
         </e>
         <e p="Repositories" t="Include">
           <e p="IEventAdministratorRepository.cs" t="Include" />
           <e p="IPointOfSaleRepository.cs" t="Include" />
+          <e p="IRepository.cs" t="Include" />
           <e p="IUserRepository.cs" t="Include" />
         </e>
         <e p="Services" t="Include">
@@ -85,10 +92,13 @@
         <e p="AppDbContext.cs" t="Include" />
         <e p="Er" t="Include">
           <e p="EventSystemEr.mwb" t="Include" />
+          <e p="EventSystemEr.mwb.bak" t="Include" />
         </e>
         <e p="EventSystem.Infra.csproj" t="IncludeRecursive" />
         <e p="Repositories" t="Include">
           <e p="EventAdministratorRepository.cs" t="Include" />
+          <e p="PointOfSaleRepository.cs" t="Include" />
+          <e p="Repository.cs" t="Include" />
           <e p="UserRepository.cs" t="Include" />
         </e>
         <e p="Services" t="Include">

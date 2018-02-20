@@ -71,6 +71,16 @@ namespace EventSystem.Api.Controllers
 			await _repository.Commit();
 			return Ok();
 		}
+		
+		[HttpGet]
+		[Route("api/auth/enable/{id}")]
+		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+		public async Task<IActionResult> Enable(Guid id)
+		{
+			await _repository.Disable(id);
+			await _repository.Commit();
+			return Ok();
+		}
 
 	}
 }

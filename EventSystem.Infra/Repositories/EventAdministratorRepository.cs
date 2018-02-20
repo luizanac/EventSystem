@@ -7,18 +7,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventSystem.Infra.Repositories
 {
-	public class EventAdministratorRepository : IEventAdministratorRepository
+	public class EventAdministratorRepository : Repository<EventAdministrator>, IEventAdministratorRepository
 	{
-		private readonly AppDbContext _dbContext;
+		/*private readonly AppDbContext _dbContext;
 
 		public EventAdministratorRepository(AppDbContext dbContext)
 		{
 			_dbContext = dbContext;
 		}
 		
-		public Task<EventAdministrator> GetById(Guid id)
+		public async Task<EventAdministrator> GetById(Guid id)
 		{
-			return _dbContext.EventAdministrators.FirstOrDefaultAsync(e => e.Id == id);
+			return await _dbContext.EventAdministrators.FirstOrDefaultAsync(e => e.Id == id);
 		}
 
 		public async Task<IList<EventAdministrator>> GetAll()
@@ -34,6 +34,9 @@ namespace EventSystem.Infra.Repositories
 		public async Task Commit()
 		{
 			await _dbContext.SaveChangesAsync();
-		}
+		}*/
+		
+		public EventAdministratorRepository(AppDbContext dbContext) : base(dbContext)
+		{}
 	}
 }

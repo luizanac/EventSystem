@@ -23,21 +23,17 @@ namespace EventSystem.Domain.Handlers
 		
 		public async Task<ICommandResult> Handle(CreateEventAdministratorCommand command)
 		{
-			if (!command.IsValid())
-			{
-				AddNotifications(command.Notifications);
-				return null;
-			}
-			
 			//Verifica se o e-mail já está sendo utilizado
 			if(await _userRepository.GetUserByEmail(command.Email) != null)
 				AddNotification("email", "Este e-mail já está sendo utilizado");
 
-			if (!IsValid())
-				return null;
-			
 			var eventAdministrator = new EventAdministrator(command.Name, command.Email, command.Password);
 			
+			AddNotifications(eventAdministrator.Notifications);
+			
+			if (!IsValid())
+				return null;
+		
 			//Faz a persistencia no banco
 			await _eventAdministratorRepository.Create(eventAdministrator);
 

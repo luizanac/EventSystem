@@ -70,11 +70,16 @@ namespace EventSystem.Api
 				options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc; 
 			});
 
+			services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IEventAdministratorRepository, EventAdministratorRepository>();
+			services.AddTransient<IPointOfSaleRepository, PointOfSaleRepository>();
+			
 			services.AddTransient<IJwtService, JwtService>();
+			
 			services.AddTransient<UserHandler, UserHandler>();
 			services.AddTransient<EventAdministratorHandler, EventAdministratorHandler>();
+			services.AddTransient<PointOfSaleHandler, PointOfSaleHandler>();
 
 			services.AddLogging();
 		}

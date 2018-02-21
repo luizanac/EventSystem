@@ -1,0 +1,10 @@
+
+Usage: dotnet [options]
+Usage: dotnet [path-to-application]
+
+Options:
+  -h|--help            Display help.
+  --version         Display version.
+
+path-to-application:
+  The path to an application .dll file to execute.

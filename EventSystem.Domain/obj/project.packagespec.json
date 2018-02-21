@@ -10,10 +10,10 @@
       "/usr/share/dotnet/sdk/NuGetFallbackFolder"
     ],
     "originalTargetFrameworks": [
-      "netstandard2.0"
+      "netcoreapp2.0"
     ],
     "frameworks": {
-      "netstandard2.0": {
+      "netcoreapp2.0": {
         "projectReferences": {
           "/home/laz/Trabalho/EventSystem/EventSystem.Shared/EventSystem.Shared.csproj": {
             "projectPath": "/home/laz/Trabalho/EventSystem/EventSystem.Shared/EventSystem.Shared.csproj"
@@ -28,16 +28,16 @@
     }
   },
   "frameworks": {
-    "netstandard2.0": {
+    "netcoreapp2.0": {
       "dependencies": {
         "Microsoft.Extensions.Logging": {
           "target": "Package",
           "version": "[2.0.0, )"
         },
-        "NETStandard.Library": {
+        "Microsoft.NETCore.App": {
           "suppressParent": "All",
           "target": "Package",
-          "version": "[2.0.1, )",
+          "version": "[2.0.0, )",
           "autoReferenced": true
         }
       },

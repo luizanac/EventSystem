@@ -10,10 +10,10 @@
       "/usr/share/dotnet/sdk/NuGetFallbackFolder"
     ],
     "originalTargetFrameworks": [
-      "netstandard2.0"
+      "netcoreapp2.0"
     ],
     "frameworks": {
-      "netstandard2.0": {
+      "netcoreapp2.0": {
         "projectReferences": {}
       }
     },
@@ -24,7 +24,7 @@
     }
   },
   "frameworks": {
-    "netstandard2.0": {
+    "netcoreapp2.0": {
       "dependencies": {
         "Flunt": {
           "target": "Package",
@@ -34,10 +34,10 @@
           "target": "Package",
           "version": "[2.0.1, )"
         },
-        "NETStandard.Library": {
+        "Microsoft.NETCore.App": {
           "suppressParent": "All",
           "target": "Package",
-          "version": "[2.0.1, )",
+          "version": "[2.0.0, )",
           "autoReferenced": true
         }
       },

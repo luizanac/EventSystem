@@ -83,7 +83,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.0" t="Include">
+            <e p="netcoreapp2.0" t="Include">
               <e p="EventSystem.Domain.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -108,7 +108,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.0" t="Include">
+            <e p="netcoreapp2.0" t="Include">
               <e p="EventSystem.Infra.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -127,7 +127,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.0" t="Include">
+            <e p="netcoreapp2.0" t="Include">
               <e p="EventSystem.Shared.AssemblyInfo.cs" t="Include" />
             </e>
           </e>

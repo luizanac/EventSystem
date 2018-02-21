@@ -8,6 +8,7 @@ using EventSystem.Infra.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -70,6 +71,8 @@ namespace EventSystem.Api
 				options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc; 
 			});
 
+			#region Dependency Injection
+
 			services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IEventAdministratorRepository, EventAdministratorRepository>();
@@ -82,6 +85,9 @@ namespace EventSystem.Api
 			services.AddTransient<PointOfSaleHandler, PointOfSaleHandler>();
 
 			services.AddLogging();
+
+			#endregion
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,6 +97,11 @@ namespace EventSystem.Api
 			{
 				app.UseDeveloperExceptionPage();
 			}
+			
+			app.UseForwardedHeaders(new ForwardedHeadersOptions
+			{
+				ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+			});
 
 			app.UseSwagger();
 			app.UseSwaggerUI(c =>

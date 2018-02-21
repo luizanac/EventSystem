@@ -1,4 +1,5 @@
 ﻿using EventSystem.Domain.Entities;
+using EventSystem.Shared.Entities;
 using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,10 @@ namespace EventSystem.Infra
 		{
 			modelBuilder.Ignore<Notifiable>();
 			modelBuilder.Ignore<Notification>();
+			modelBuilder.Entity<Entity>()
+				.Ignore(e => e.Notifications)
+				.Ignore(e => e.Valid)
+				.Ignore(e => e.Invalid);
 		}
 
 		public DbSet<User> Users { get; set; }

@@ -1,14 +1,4 @@
 .idea
 
-
-./EventSystem.Api/obj/
-./EventSystem.Api/bin/
-
-./EventSystem.Domain/obj/
-./EventSystem.Domain/bin/
-
-./EventSystem.Infra/obj/
-./EventSystem.Infra/bin/
-
-./EventSystem.Shared/obj/
-./EventSystem.Shared/bin/
+obj/
+bin/

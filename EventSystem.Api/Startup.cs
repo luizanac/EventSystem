@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -70,7 +72,7 @@ namespace EventSystem.Api
 			{
 				options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc; 
 			});
-
+			
 			#region Dependency Injection
 
 			services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
@@ -93,6 +95,13 @@ namespace EventSystem.Api
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
+			app.UseCors(builder => 
+				builder
+					.AllowAnyHeader()
+					.AllowAnyMethod()
+					.AllowAnyOrigin()
+					.AllowCredentials());
+			
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

@@ -26,7 +26,7 @@ namespace EventSystem.Api.Controllers
 		[HttpPost]
 		[Route("api/eventAdministrator")]
 		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
-		public async Task<IActionResult> Post(CreateEventAdministratorCommand command)
+		public async Task<IActionResult> Post([FromBody] CreateEventAdministratorCommand command)
 		{
 			
 			var result = await _handler.Handle(command);

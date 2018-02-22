@@ -26,7 +26,7 @@ namespace EventSystem.Api.Controllers
 		[HttpPost]
 		[Route("api/auth")]
 		[AllowAnonymous]
-		public async Task<IActionResult> Authenticate(LoginUserCommand command)
+		public async Task<IActionResult> Authenticate([FromBody] LoginUserCommand command)
 		{
 			var result = await _handler.Handle(command);
 			if (!_handler.IsValid())
@@ -38,7 +38,7 @@ namespace EventSystem.Api.Controllers
 		[HttpPut]
 		[Route("api/auth/changePassword")]
 		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-		public async Task<IActionResult> ChangePassword(ChangeUserPasswordCommand command)
+		public async Task<IActionResult> ChangePassword([FromBody] ChangeUserPasswordCommand command)
 		{
 			var id = Guid.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sid));
 			

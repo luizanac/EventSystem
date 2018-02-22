@@ -69,8 +69,8 @@ namespace EventSystem.Domain.Handlers
 			var user =  await _userRepository.GetById(command.Id);
 			return new InfoUserCommandResult(
 				user.Id,
-				user.Email,
 				user.Name,
+				user.Email,
 				user.IsActive,
 				user.IsDisabled
 			);

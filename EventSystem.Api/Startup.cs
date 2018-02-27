@@ -75,16 +75,32 @@ namespace EventSystem.Api
 			
 			#region Dependency Injection
 
+			#region Repositories
+
 			services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 			services.AddTransient<IUserRepository, UserRepository>();
 			services.AddTransient<IEventAdministratorRepository, EventAdministratorRepository>();
 			services.AddTransient<IPointOfSaleRepository, PointOfSaleRepository>();
+			services.AddTransient<IEventRepository, EventRepository>();
 			
+
+			#endregion
+
+			#region Services
+
 			services.AddTransient<IJwtService, JwtService>();
-			
+
+			#endregion
+
+			#region Handlers
+
 			services.AddTransient<UserHandler, UserHandler>();
 			services.AddTransient<EventAdministratorHandler, EventAdministratorHandler>();
 			services.AddTransient<PointOfSaleHandler, PointOfSaleHandler>();
+			services.AddTransient<EventHandler, EventHandler>();
+
+			#endregion
+			
 
 			services.AddLogging();
 

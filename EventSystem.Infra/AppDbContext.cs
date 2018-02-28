@@ -22,5 +22,6 @@ namespace EventSystem.Infra
 		public DbSet<Administrator> Administrators { get; set; }
 		public DbSet<PointOfSale> PointOfSales { get; set; }
 		public DbSet<EventAdministrator> EventAdministrators { get; set; }
+		public DbSet<Event> Events { get; set; }
 	}
 }

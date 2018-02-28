@@ -46,6 +46,7 @@ namespace EventSystem.Domain.Handlers
 				eventAdministrator.Email
 			);
 		}
+		
 
 		public bool IsValid()
 		{

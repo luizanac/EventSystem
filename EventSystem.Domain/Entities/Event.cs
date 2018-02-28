@@ -11,6 +11,7 @@ namespace EventSystem.Domain.Entities
 		{}
 		
 		public Event(string name, DateTime startDate, DateTime endDate, string photo)
+			:base()
 		{
 			Name = name;
 			StartDate = startDate;
@@ -21,6 +22,7 @@ namespace EventSystem.Domain.Entities
 		}
 		
 		public Event(string name, DateTime startDate, DateTime endDate)
+			:base()
 		{
 			Name = name;
 			StartDate = startDate;
@@ -43,8 +45,8 @@ namespace EventSystem.Domain.Entities
 				.Requires()
 				.IsNotNullOrEmpty(Name, "name", "Nome é um campo obrigatório" )
 				.HasMaxLen(Name, 45,"name", "O máximo de caracteres para nome é 45")
-				.IsTrue(DateTime.TryParse(StartDate.ToString(CultureInfo.CurrentCulture), out startDate), "startDate", "Data inicial é um campo obrigatório" )
-				.IsTrue(DateTime.TryParse(EndDate.ToString(CultureInfo.CurrentCulture), out endDate), "endDate", "Data final é um campo obrigatório" )
+				.IsTrue(DateTime.TryParse(StartDate.ToString(CultureInfo.CurrentCulture), out startDate), "startDate", "Data inicial deve ser válido" )
+				.IsTrue(DateTime.TryParse(EndDate.ToString(CultureInfo.CurrentCulture), out endDate), "endDate", "Data final deve ser válido" )
 			);
 		}
 	}

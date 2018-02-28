@@ -15,8 +15,8 @@ namespace EventSystem.Domain.Commands.EventCommands.Input
 		private DateTime _endDate;
 
 		public string Name { get; set; }
-		public DateTime StartDate { get; set; }
-		public DateTime EndDate { get; set; }
+		public string StartDate { get; set; }
+		public string EndDate { get; set; }
 		public IFormFile Photo { get; set; }
 		
 		public bool IsValid()
@@ -25,8 +25,8 @@ namespace EventSystem.Domain.Commands.EventCommands.Input
 				.Requires()
 				.IsNotNullOrEmpty(Name, "name", "Nome é um campo obrigatório" )
 				.HasMaxLen(Name, 45,"name", "O máximo de caracteres para nome é 45")
-				.IsTrue(DateTime.TryParse(StartDate.ToString(CultureInfo.CurrentCulture), out _startDate), "startDate", "Data inicial é um campo obrigatório" )
-				.IsTrue(DateTime.TryParse(EndDate.ToString(CultureInfo.CurrentCulture), out _endDate), "endDate", "Data final é um campo obrigatório" )
+				.IsTrue(DateTime.TryParse(StartDate , out _startDate), "startDate", "Data inicial deve ser válido" )
+				.IsTrue(DateTime.TryParse(EndDate , out _endDate), "endDate", "Data final deve ser válido" )
 			);
 			
 			return Valid;

@@ -27,7 +27,7 @@ namespace EventSystem.Api.Controllers
 		[HttpPost]
 		[Route("api/pointOfSale")]
 		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, EventAdministrator")]
-		public async Task<IActionResult> Post([FromBody] CreatePointOfSaleCommand command)
+		public async Task<IActionResult> Post(CreatePointOfSaleCommand command)
 		{
 			var result = await _handler.Handle(command);
 			if (!_handler.IsValid())

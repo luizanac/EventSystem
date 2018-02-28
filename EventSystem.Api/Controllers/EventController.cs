@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using EventSystem.Domain.Commands.EventCommands.Input;
 using EventSystem.Domain.Repositories;
@@ -29,7 +30,7 @@ namespace EventSystem.Api.Controllers
 		[HttpPost]
 		[Route("api/event")]
 		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "EventAdministrator")]
-		public async Task<IActionResult> Post([FromBody] CreateEventCommand command)
+		public async Task<IActionResult> Post(CreateEventCommand command)
 		{
 			var result = await _handler.Handle(command);
 			if (!_handler.IsValid())

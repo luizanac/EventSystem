@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using EventSystem.Domain.Commands.EventCommands.Input;
 using EventSystem.Domain.Entities;
 using EventSystem.Domain.Repositories;
@@ -24,9 +25,10 @@ namespace EventSystem.Domain.Handlers
 			if (!command.IsValid())
 			{
 				AddNotifications(command.Notifications);
+				return null;
 			}
 
-			var mEvent = new Event(command.Name, command.StartDate, command.EndDate);
+			var mEvent = new Event(command.Name, DateTime.Parse(command.StartDate), DateTime.Parse(command.EndDate));
 			
 			// Valida às entidades relacionadas
 			AddNotifications(mEvent.Notifications);
@@ -36,7 +38,7 @@ namespace EventSystem.Domain.Handlers
 			
 			// Cadastra o evento
 			await _eventRepository.Create(mEvent);
-			
+			await _eventRepository.Commit();
 			
 			
 			// Retorna os dados para o ICommandResult

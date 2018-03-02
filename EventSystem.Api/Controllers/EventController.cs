@@ -12,6 +12,7 @@ using EventHandler = EventSystem.Domain.Handlers.EventHandler;
 
 namespace EventSystem.Api.Controllers
 {
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class EventController : Controller
 	{
 
@@ -29,7 +30,7 @@ namespace EventSystem.Api.Controllers
 		
 		[HttpPost]
 		[Route("api/event")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "EventAdministrator")]
+		[Authorize(Roles = "EventAdministrator")]
 		public async Task<IActionResult> Post(CreateEventCommand command)
 		{
 			var result = await _handler.Handle(command);
@@ -41,15 +42,27 @@ namespace EventSystem.Api.Controllers
 		
 		[HttpGet]
 		[Route("api/event/{id}")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "EventAdministrator")]
+		[Authorize(Roles = "EventAdministrator")]
 		public async Task<IActionResult> Get(Guid id)
 		{
 			return Ok(await _eventRepository.GetById(id));
 		}
+		
+		
+		[HttpDelete]
+		[Route("api/event/{id}")]
+		[Authorize(Roles = "EventAdministrator")]
+		public async Task<IActionResult> Delete(Guid id)
+		{
+			var mEvent = await _eventRepository.GetById(id);
+			_eventRepository.Remove(mEvent);
+			await _eventRepository.Commit();
+			return Ok();
+		}
 	
 		[HttpGet]
 		[Route("api/event")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "EventAdministrator")]
+		[Authorize(Roles = "EventAdministrator")]
 		public async Task<IActionResult> Get()
 		{
 			return Ok(await _eventRepository.GetAll());

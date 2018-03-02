@@ -34,7 +34,7 @@ namespace EventSystem.Domain.Entities
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 		public string Photo { get; set; }
-
+		
 
 		private void Validate()
 		{

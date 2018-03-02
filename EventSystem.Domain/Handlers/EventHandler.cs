@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EventSystem.Domain.Commands.EventCommands.Input;
+using EventSystem.Domain.Commands.EventCommands.Output;
 using EventSystem.Domain.Entities;
 using EventSystem.Domain.Repositories;
 using EventSystem.Shared.Commands;
@@ -42,7 +43,13 @@ namespace EventSystem.Domain.Handlers
 			
 			
 			// Retorna os dados para o ICommandResult
-			return null;
+			return new CreateEventCommandResult(
+				mEvent.Name, 
+				mEvent.StartDate, 
+				mEvent.EndDate, 
+				mEvent.Photo, 
+				mEvent.CreateDate
+			);
 		}
 		
 		public bool IsValid()

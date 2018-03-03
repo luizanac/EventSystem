@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using EventSystem.Domain.Commands.EventAdministratorCommands.Input;
+using EventSystem.Domain.Commands.EventCommands.Input;
 using EventSystem.Domain.Commands.PointOfSaleCommands.Input;
 using EventSystem.Domain.Handlers;
 using EventSystem.Domain.Repositories;
@@ -11,13 +12,18 @@ using Microsoft.Extensions.Logging;
 
 namespace EventSystem.Api.Controllers
 {
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class PointOfSaleController : Controller
 	{
 		private readonly IPointOfSaleRepository _pointOfSaleRepository;
 		private readonly PointOfSaleHandler _handler;
 		private readonly ILogger<PointOfSaleController> _logger;
 
-		public PointOfSaleController(IPointOfSaleRepository pointOfSaleRepository, PointOfSaleHandler handler, ILogger<PointOfSaleController> logger)
+		public PointOfSaleController(
+			IPointOfSaleRepository pointOfSaleRepository, 
+			PointOfSaleHandler handler, 
+			ILogger<PointOfSaleController> logger
+		)
 		{
 			_pointOfSaleRepository = pointOfSaleRepository;
 			_handler = handler;
@@ -26,7 +32,7 @@ namespace EventSystem.Api.Controllers
 
 		[HttpPost]
 		[Route("api/pointOfSale")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, EventAdministrator")]
+		[Authorize(Roles = "Administrator, EventAdministrator")]
 		public async Task<IActionResult> Post(CreatePointOfSaleCommand command)
 		{
 			var result = await _handler.Handle(command);
@@ -38,7 +44,7 @@ namespace EventSystem.Api.Controllers
 		
 		[HttpGet]
 		[Route("api/pointOfSale/{id}")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, EventAdministrator")]
+		[Authorize(Roles = "Administrator, EventAdministrator")]
 		public async Task<IActionResult> Get(Guid id)
 		{
 			return Ok(await _pointOfSaleRepository.GetById(id));
@@ -46,7 +52,7 @@ namespace EventSystem.Api.Controllers
 	
 		[HttpGet]
 		[Route("api/pointOfSale")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, EventAdministrator")]
+		[Authorize(Roles = "Administrator, EventAdministrator")]
 		public async Task<IActionResult> Get()
 		{
 			return Ok(await _pointOfSaleRepository.GetAll());

@@ -12,9 +12,10 @@ using System;
 namespace EventSystem.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180303023719_AddBoxOfficeEntity")]
+    partial class AddBoxOfficeEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,11 +212,11 @@ namespace EventSystem.Infra.Migrations
             modelBuilder.Entity("EventSystem.Domain.Entities.PointOfSaleEvent", b =>
                 {
                     b.HasOne("EventSystem.Domain.Entities.Event", "Event")
-                        .WithMany("PointOfSaleEvents")
+                        .WithMany()
                         .HasForeignKey("EventId");
 
                     b.HasOne("EventSystem.Domain.Entities.PointOfSale", "PointOfSale")
-                        .WithMany("PointOfSaleEvents")
+                        .WithMany()
                         .HasForeignKey("PointOfSaleId");
                 });
 

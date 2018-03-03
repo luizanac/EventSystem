@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using EventSystem.Shared.Entities;
 using Flunt.Validations;
 
@@ -35,7 +37,27 @@ namespace EventSystem.Domain.Entities
 		public DateTime EndDate { get; set; }
 		public string Photo { get; set; }
 		
+		public virtual IList<PointOfSaleEvent> PointOfSaleEvents { get; set; }
 
+		//Adiciona um ponto de venda ao evento
+		public void AddPointOfSaleInEvent(PointOfSale pointOfSale)
+		{
+			PointOfSaleEvents.Add(new PointOfSaleEvent(pointOfSale, this));
+		}
+		
+		//Verifica se o pdv já está no evento
+		public bool PointOfSaleInEvent(Guid pointOfsale)
+		{
+			var pointOfSaleEvent = PointOfSaleEvents.SingleOrDefault(ps => ps.PointOfSaleId == pointOfsale);
+			if (pointOfSaleEvent == null)
+			{
+				return false;
+			}
+
+			return true;
+			
+		}
+		
 		private void Validate()
 		{
 			DateTime startDate;

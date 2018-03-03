@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventSystem.Api.Controllers
 {
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 	public class AuthController : Controller
 	{
 		private readonly IUserRepository _repository;
@@ -37,7 +38,7 @@ namespace EventSystem.Api.Controllers
 		
 		[HttpPut]
 		[Route("api/auth/changePassword")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+		[Authorize]
 		public async Task<IActionResult> ChangePassword(ChangeUserPasswordCommand command)
 		{
 			var id = Guid.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sid));
@@ -52,7 +53,7 @@ namespace EventSystem.Api.Controllers
 		// GET api/Auth/Info
 		[HttpGet]
 		[Route("api/auth/info")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+		[Authorize]
 		public async Task<IActionResult> Info()
 		{
 			var id = Guid.Parse(HttpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sid));
@@ -64,7 +65,7 @@ namespace EventSystem.Api.Controllers
 		
 		[HttpDelete]
 		[Route("api/auth/disable/{id}")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+		[Authorize(Roles = "Administrator")]
 		public async Task<IActionResult> Disable(Guid id)
 		{
 			await _repository.Disable(id);
@@ -74,7 +75,7 @@ namespace EventSystem.Api.Controllers
 		
 		[HttpGet]
 		[Route("api/auth/enable/{id}")]
-		[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+		[Authorize(Roles = "Administrator")]
 		public async Task<IActionResult> Enable(Guid id)
 		{
 			await _repository.Disable(id);

@@ -136,9 +136,9 @@ namespace EventSystem.Api
 			});
 
 			app.UseMvc();
-			var admin = new Administrator("Luiz Anacleto", "luizanacletozuchinali@gmail.com", "12345678") {IsActive = true};
+			/*var admin = new Administrator("Luiz Anacleto", "luizanacletozuchinali@gmail.com", "12345678") {IsActive = true};
 			dbContext.Administrators.Add(admin);
-			dbContext.SaveChanges();
+			dbContext.SaveChanges();*/
 		}
 	}
 }

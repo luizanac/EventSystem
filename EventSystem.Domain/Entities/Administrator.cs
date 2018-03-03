@@ -7,7 +7,11 @@ namespace EventSystem.Domain.Entities
 		public Administrator(string name, string email, string password) : 
 			base(name, email, password)
 		{}
-		
-		public virtual IEnumerable<Event> Events { get; set; }
+
+		public Administrator()
+		{
+			
+		}
+		public virtual IList<Event> Events { get; set; }
 	}
 }

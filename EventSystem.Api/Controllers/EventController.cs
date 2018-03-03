@@ -12,25 +12,22 @@ using EventHandler = EventSystem.Domain.Handlers.EventHandler;
 
 namespace EventSystem.Api.Controllers
 {
-	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+	[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, EventAdministrator")]
 	public class EventController : Controller
 	{
 
 		private readonly IEventRepository _eventRepository;
 		private readonly EventHandler _handler;
-		private readonly ILogger<EventController> _logger;
 		
 		
-		public EventController(IEventRepository eventRepository, EventHandler handler, ILogger<EventController> logger)
+		public EventController(IEventRepository eventRepository, EventHandler handler)
 		{
 			_eventRepository = eventRepository;
 			_handler = handler;
-			_logger = logger;
 		}
 		
 		[HttpPost]
 		[Route("api/event")]
-		[Authorize(Roles = "EventAdministrator")]
 		public async Task<IActionResult> Post(CreateEventCommand command)
 		{
 			var result = await _handler.Handle(command);
@@ -42,7 +39,6 @@ namespace EventSystem.Api.Controllers
 		
 		[HttpGet]
 		[Route("api/event/{id}")]
-		[Authorize(Roles = "EventAdministrator")]
 		public async Task<IActionResult> Get(Guid id)
 		{
 			return Ok(await _eventRepository.GetById(id));
@@ -51,7 +47,6 @@ namespace EventSystem.Api.Controllers
 		
 		[HttpDelete]
 		[Route("api/event/{id}")]
-		[Authorize(Roles = "EventAdministrator")]
 		public async Task<IActionResult> Delete(Guid id)
 		{
 			var mEvent = await _eventRepository.GetById(id);
@@ -62,10 +57,20 @@ namespace EventSystem.Api.Controllers
 	
 		[HttpGet]
 		[Route("api/event")]
-		[Authorize(Roles = "EventAdministrator")]
 		public async Task<IActionResult> Get()
 		{
 			return Ok(await _eventRepository.GetAll());
+		}
+		
+		[HttpPost]
+		[Route("api/event/{eventId}/pointOfSale")]
+		public async Task<IActionResult> AddPointOfSaleInEvent(AddPointOfSaleInEventCommand command)
+		{
+			var result = await _handler.Handle(command);
+			if (!_handler.IsValid())
+				return BadRequest(_handler.GetErrors());
+
+			return Ok(result);
 		}
 		
 	}

@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using EventSystem.Domain.Commands.EventCommands.Input;
 using EventSystem.Domain.Commands.PointOfSaleCommands.Input;
 using EventSystem.Domain.Commands.PointOfSaleCommands.Output;
 using EventSystem.Domain.Entities;

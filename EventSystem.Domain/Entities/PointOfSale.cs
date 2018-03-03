@@ -1,4 +1,6 @@
-﻿using Flunt.Validations;
+﻿using System.Collections.Generic;
+using Flunt.Validations;
+using Newtonsoft.Json;
 
 namespace EventSystem.Domain.Entities
 {
@@ -7,6 +9,9 @@ namespace EventSystem.Domain.Entities
 		
 		public string Cnpj { get; set; }
 		public string Phone { get; set; }
+		
+		[JsonIgnore]
+		public virtual IList<PointOfSaleEvent> PointOfSaleEvents { get; set; }
 		
 		public PointOfSale()
 		{}

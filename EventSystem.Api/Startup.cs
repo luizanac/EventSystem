@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using EventSystem.Domain.Entities;
 using EventSystem.Domain.Handlers;
 using EventSystem.Domain.Repositories;
 using EventSystem.Domain.Services;
@@ -109,7 +110,7 @@ namespace EventSystem.Api
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppDbContext dbContext)
 		{
 			app.UseCors(builder => 
 				builder
@@ -135,6 +136,9 @@ namespace EventSystem.Api
 			});
 
 			app.UseMvc();
+			var admin = new Administrator("Luiz Anacleto", "luizanacletozuchinali@gmail.com", "12345678") {IsActive = true};
+			dbContext.Administrators.Add(admin);
+			dbContext.SaveChanges();
 		}
 	}
 }

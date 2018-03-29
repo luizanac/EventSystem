@@ -39,8 +39,8 @@ namespace EventSystem.Domain.Entities
 		public string Email { get; set; }
 		[JsonIgnore]
 		public string Password { get; set; }
-		public bool IsActive { get; set; }
-		public bool IsDisabled { get; set; }
+		public bool? IsActive { get; set; }
+		public bool? IsDisabled { get; set; }
 		public string Discriminator { get; set; }
 	}
 }	

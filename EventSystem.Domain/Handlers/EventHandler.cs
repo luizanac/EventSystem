@@ -11,8 +11,8 @@ namespace EventSystem.Domain.Handlers
 {
 	public class EventHandler : 
 		Handler,
-		ICommandHandler<CreateEventCommand>,
-		ICommandHandler<AddPointOfSaleInEventCommand>
+		ICommandHandler<CreateEventCommand, ICommandResult>,
+		ICommandHandler<AddPointOfSaleInEventCommand, ICommandResult>
 	{
 
 		private readonly IEventRepository _eventRepository;
@@ -69,7 +69,7 @@ namespace EventSystem.Domain.Handlers
 				return null;
 			}
 
-			var @event = await _eventRepository.GetByIdWithEvents(command.EventId);
+			var @event = await _eventRepository.GetByIdWithPointOfSaleEvents(command.EventId);
 			if (@event.PointOfSaleInEvent(command.PointOfSaleId))
 			{
 				AddNotification("event", "Ponto de venda já está cadastrado neste evento");

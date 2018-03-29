@@ -2,7 +2,10 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using EventSystem.Domain.Commands.EventCommands.Input;
+using EventSystem.Domain.Commands.EventCommands.Output;
+using EventSystem.Domain.Entities;
 using EventSystem.Domain.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -41,7 +44,7 @@ namespace EventSystem.Api.Controllers
 		[Route("api/event/{id}")]
 		public async Task<IActionResult> Get(Guid id)
 		{
-			return Ok(await _eventRepository.GetById(id));
+			return Ok(await _eventRepository.GetByIdWithPointOfSaleEvents(id));
 		}
 		
 		
@@ -59,7 +62,7 @@ namespace EventSystem.Api.Controllers
 		[Route("api/event")]
 		public async Task<IActionResult> Get()
 		{
-			return Ok(await _eventRepository.GetAll());
+			return Ok(await _eventRepository.GetAllWithPointOfSaleEvents());
 		}
 		
 		[HttpPost]

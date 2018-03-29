@@ -8,8 +8,10 @@ namespace EventSystem.Domain.Entities
 		public Decimal Value { get; set; }
 		public DateTime PaymenteDate { get; set; }
 		
+		public Guid ClientId { get; set; }
+		public Guid PointOfSaleEventId { get; set; }
+		
+		public virtual PointOfSaleEvent PointOfSaleEvent { get; set; }
 		public virtual Client Client { get; set; }
-		public virtual PointOfSale PointOfSale { get; set; }
-		public virtual Event Event { get; set; }
 	}
 }

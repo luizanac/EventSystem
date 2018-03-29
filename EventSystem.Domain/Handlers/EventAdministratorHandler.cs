@@ -9,7 +9,7 @@ namespace EventSystem.Domain.Handlers
 {
 	public class EventAdministratorHandler :
 		Handler, 
-		ICommandHandler<CreateEventAdministratorCommand>
+		ICommandHandler<CreateEventAdministratorCommand, ICommandResult>
 	{
 
 		private readonly IUserRepository _userRepository;

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EventSystem.Domain.Entities;
 using EventSystem.Domain.Repositories;
@@ -12,11 +12,20 @@ namespace EventSystem.Infra.Repositories
 		public EventRepository(AppDbContext dbContext) : base(dbContext)
 		{}
 		
-		public async Task<Event> GetByIdWithEvents(Guid id)
+		public async Task<Event> GetByIdWithPointOfSaleEvents(Guid id)
 		{
 			return await DbSet
 				.Include(e => e.PointOfSaleEvents)
+				.ThenInclude(pse => pse.PointOfSale)
 				.SingleOrDefaultAsync(e => e.Id == id);
+		}
+
+		public async Task<IList<Event>> GetAllWithPointOfSaleEvents()
+		{
+			return await DbSet
+				.Include(e => e.PointOfSaleEvents)
+				.ThenInclude(pse => pse.PointOfSale)
+				.ToListAsync();
 		}
 	}
 }

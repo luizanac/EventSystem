@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace EventSystem.Shared.Commands
 {
-	public interface ICommandHandler<T> : ICommand
+	public interface ICommandHandler<T, TR> : ICommand
 	{
-		Task<ICommandResult> Handle(T command);
+		Task<TR> Handle(T command);
 		Dictionary<string, List<string>> GetErrors();
 	}
 }

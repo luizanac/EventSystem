@@ -12,6 +12,7 @@ namespace EventSystem.Domain.Entities
 		{
 			
 		}
-		public virtual IList<Event> Events { get; set; }
+		
+		public IList<EventAdministrator> EventAdministrators { get; set; }
 	}
 }

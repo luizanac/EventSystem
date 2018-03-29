@@ -9,9 +9,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.json" Version="11.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.2.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\PointOfSaleEventCommands\Output" />
   </ItemGroup>
 </Project>

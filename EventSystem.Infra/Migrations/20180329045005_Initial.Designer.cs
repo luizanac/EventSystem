@@ -12,8 +12,8 @@ using System;
 namespace EventSystem.Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180303023719_AddBoxOfficeEntity")]
-    partial class AddBoxOfficeEntity
+    [Migration("20180329045005_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,17 +27,27 @@ namespace EventSystem.Infra.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<decimal>("Balance");
+                    b.Property<decimal>("Balance")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0m);
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Phone");
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Rg");
+                    b.Property<string>("Rg")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
 
@@ -49,23 +59,22 @@ namespace EventSystem.Infra.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AdministratorId");
-
                     b.Property<DateTime>("CreateDate");
 
                     b.Property<DateTime>("EndDate");
 
                     b.Property<Guid?>("EventAdministratorId");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Photo");
+                    b.Property<string>("Photo")
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime>("StartDate");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AdministratorId");
 
                     b.HasIndex("EventAdministratorId");
 
@@ -77,15 +86,13 @@ namespace EventSystem.Infra.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("ClientId");
+                    b.Property<Guid>("ClientId");
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<Guid?>("EventId");
-
                     b.Property<DateTime>("PaymenteDate");
 
-                    b.Property<Guid?>("PointOfSaleId");
+                    b.Property<Guid>("PointOfSaleEventId");
 
                     b.Property<decimal>("Value");
 
@@ -93,9 +100,7 @@ namespace EventSystem.Infra.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("PointOfSaleId");
+                    b.HasIndex("PointOfSaleEventId");
 
                     b.ToTable("Payments");
                 });
@@ -107,9 +112,9 @@ namespace EventSystem.Infra.Migrations
 
                     b.Property<DateTime>("CreateDate");
 
-                    b.Property<Guid?>("EventId");
+                    b.Property<Guid>("EventId");
 
-                    b.Property<Guid?>("PointOfSaleId");
+                    b.Property<Guid>("PointOfSaleId");
 
                     b.HasKey("Id");
 
@@ -130,15 +135,25 @@ namespace EventSystem.Infra.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<bool>("IsActive");
+                    b.Property<bool?>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(false);
 
-                    b.Property<bool>("IsDisabled");
+                    b.Property<bool?>("IsDisabled")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(false);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar(64)");
 
                     b.HasKey("Id");
 
@@ -157,11 +172,21 @@ namespace EventSystem.Infra.Migrations
                     b.HasDiscriminator().HasValue("Administrator");
                 });
 
+            modelBuilder.Entity("EventSystem.Domain.Entities.BoxOffice", b =>
+                {
+                    b.HasBaseType("EventSystem.Domain.Entities.User");
+
+
+                    b.ToTable("BoxOffice");
+
+                    b.HasDiscriminator().HasValue("BoxOffice");
+                });
+
             modelBuilder.Entity("EventSystem.Domain.Entities.EventAdministrator", b =>
                 {
                     b.HasBaseType("EventSystem.Domain.Entities.User");
 
-                    b.Property<Guid?>("AdministratorId");
+                    b.Property<Guid>("AdministratorId");
 
                     b.HasIndex("AdministratorId");
 
@@ -174,9 +199,11 @@ namespace EventSystem.Infra.Migrations
                 {
                     b.HasBaseType("EventSystem.Domain.Entities.User");
 
-                    b.Property<string>("Cnpj");
+                    b.Property<string>("Cnpj")
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Phone");
+                    b.Property<string>("Phone")
+                        .HasColumnType("varchar(50)");
 
                     b.ToTable("PointOfSale");
 
@@ -185,10 +212,6 @@ namespace EventSystem.Infra.Migrations
 
             modelBuilder.Entity("EventSystem.Domain.Entities.Event", b =>
                 {
-                    b.HasOne("EventSystem.Domain.Entities.Administrator")
-                        .WithMany("Events")
-                        .HasForeignKey("AdministratorId");
-
                     b.HasOne("EventSystem.Domain.Entities.EventAdministrator")
                         .WithMany("Events")
                         .HasForeignKey("EventAdministratorId");
@@ -197,34 +220,35 @@ namespace EventSystem.Infra.Migrations
             modelBuilder.Entity("EventSystem.Domain.Entities.Payment", b =>
                 {
                     b.HasOne("EventSystem.Domain.Entities.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
+                        .WithMany("Payments")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("EventSystem.Domain.Entities.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId");
-
-                    b.HasOne("EventSystem.Domain.Entities.PointOfSale", "PointOfSale")
-                        .WithMany()
-                        .HasForeignKey("PointOfSaleId");
+                    b.HasOne("EventSystem.Domain.Entities.PointOfSaleEvent", "PointOfSaleEvent")
+                        .WithMany("Payments")
+                        .HasForeignKey("PointOfSaleEventId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EventSystem.Domain.Entities.PointOfSaleEvent", b =>
                 {
                     b.HasOne("EventSystem.Domain.Entities.Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId");
+                        .WithMany("PointOfSaleEvents")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("EventSystem.Domain.Entities.PointOfSale", "PointOfSale")
-                        .WithMany()
-                        .HasForeignKey("PointOfSaleId");
+                        .WithMany("PointOfSaleEvents")
+                        .HasForeignKey("PointOfSaleId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EventSystem.Domain.Entities.EventAdministrator", b =>
                 {
                     b.HasOne("EventSystem.Domain.Entities.Administrator", "Administrator")
-                        .WithMany()
-                        .HasForeignKey("AdministratorId");
+                        .WithMany("EventAdministrators")
+                        .HasForeignKey("AdministratorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

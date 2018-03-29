@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using EventSystem.Shared.Entities;
 
 namespace EventSystem.Domain.Entities
@@ -10,5 +12,7 @@ namespace EventSystem.Domain.Entities
 		public string Email { get; set; }
 		public string Phone { get; set; }
 		public Decimal Balance { get; set; }
+		
+		public virtual IList<Payment> Payments { get; set; } 
 	}
 }

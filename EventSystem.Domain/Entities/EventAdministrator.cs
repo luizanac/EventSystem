@@ -15,7 +15,9 @@ namespace EventSystem.Domain.Entities
 		public EventAdministrator(string name, string email, string password) : base(name, email, password)
 		{}
 		
+		public Guid AdministratorId { get; set; }
 		public virtual Administrator Administrator { get; set; }
-		public virtual IEnumerable<Event> Events { get; set; }
+		
+		public virtual IList<Event> Events { get; set; }
 	}
 }

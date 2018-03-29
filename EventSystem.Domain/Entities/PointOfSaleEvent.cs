@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using EventSystem.Shared.Entities;
 
 namespace EventSystem.Domain.Entities
@@ -19,5 +20,6 @@ namespace EventSystem.Domain.Entities
 		
 		public virtual PointOfSale PointOfSale { get; set; }
 		public virtual Event Event { get; set; }
+		public virtual IList<Payment> Payments { get; set; }
 	}
 }

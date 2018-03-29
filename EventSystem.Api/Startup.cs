@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using EventSystem.Domain.Entities;
+using AutoMapper;
 using EventSystem.Domain.Handlers;
 using EventSystem.Domain.Repositories;
 using EventSystem.Domain.Services;
@@ -10,8 +10,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +25,7 @@ namespace EventSystem.Api
 		public Startup(IConfiguration configuration)
 		{
 			Configuration = configuration;
+
 		}
 
 		public IConfiguration Configuration { get; }
@@ -69,9 +68,11 @@ namespace EventSystem.Api
 				c.SwaggerDoc("v1", new Info { Title = "Eventos API", Version = "v1" });
 			});
 
+			services.AddAutoMapper();
 			services.AddMvc().AddJsonOptions(options =>
 			{
-				options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc; 
+				options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+				options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 			});
 			
 			#region Dependency Injection
@@ -83,6 +84,8 @@ namespace EventSystem.Api
 			services.AddTransient<IEventAdministratorRepository, EventAdministratorRepository>();
 			services.AddTransient<IPointOfSaleRepository, PointOfSaleRepository>();
 			services.AddTransient<IEventRepository, EventRepository>();
+			services.AddTransient<IBoxOfficeRepository, BoxOfficeRepository>();
+			
 			
 
 			#endregion
@@ -99,6 +102,7 @@ namespace EventSystem.Api
 			services.AddTransient<EventAdministratorHandler, EventAdministratorHandler>();
 			services.AddTransient<PointOfSaleHandler, PointOfSaleHandler>();
 			services.AddTransient<EventHandler, EventHandler>();
+			services.AddTransient<BoxOfficeHandler, BoxOfficeHandler>();
 
 			#endregion
 			

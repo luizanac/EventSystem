@@ -18,8 +18,8 @@ namespace EventSystem.Domain.Handlers
 {
 	public class UserHandler :
 		Handler,
-		ICommandHandler<LoginUserCommand>,
-		ICommandHandler<InfoUserCommand>
+		ICommandHandler<LoginUserCommand, ICommandResult>,
+		ICommandHandler<InfoUserCommand, ICommandResult>
 	{
 		private readonly IUserRepository _userRepository;
 		private readonly IJwtService _jwtService;
@@ -48,7 +48,7 @@ namespace EventSystem.Domain.Handlers
 				return null;
 			}
 
-			if (user.IsDisabled)
+			if (user.IsDisabled != null && user.IsDisabled.Value)
 			{
 				AddNotification("message", "Sua conta está desativada, entre em contato com o administrador");
 				return null;

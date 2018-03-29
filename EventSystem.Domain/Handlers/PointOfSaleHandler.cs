@@ -11,7 +11,7 @@ namespace EventSystem.Domain.Handlers
 {
 	public class PointOfSaleHandler :
 		Handler,
-		ICommandHandler<CreatePointOfSaleCommand>
+		ICommandHandler<CreatePointOfSaleCommand, ICommandResult>
 	{
 
 		private readonly IUserRepository _userRepository;

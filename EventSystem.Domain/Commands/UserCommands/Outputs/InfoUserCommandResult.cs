@@ -5,7 +5,7 @@ namespace EventSystem.Domain.Commands.UserCommands.Outputs
 {
 	public class InfoUserCommandResult : ICommandResult
 	{
-		public InfoUserCommandResult(Guid id, string name, string email, bool isActive, bool isDisabled)
+		public InfoUserCommandResult(Guid id, string name, string email, bool? isActive, bool? isDisabled)
 		{
 			Id = id;
 			Name = name;
@@ -17,7 +17,7 @@ namespace EventSystem.Domain.Commands.UserCommands.Outputs
 		public Guid Id { get; set; }
 		public string Name { get; set; }
 		public string Email { get; set; }
-		public bool IsActive { get; set; }
-		public bool IsDisabled { get; set; }
+		public bool? IsActive { get; set; }
+		public bool? IsDisabled { get; set; }
 	}
 }

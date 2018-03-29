@@ -10,7 +10,7 @@ namespace EventSystem.Domain.Handlers
 {
 	public class BoxOfficeHandler :
 		Handler, 
-		ICommandHandler<CreateBoxOfficeCommand>
+		ICommandHandler<CreateBoxOfficeCommand, ICommandResult>
 	{
 
 		private readonly IUserRepository _userRepository;

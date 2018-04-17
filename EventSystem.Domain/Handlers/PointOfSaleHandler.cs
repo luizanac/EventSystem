@@ -1,10 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Threading.Tasks;
 using EventSystem.Domain.Commands.EventCommands.Input;
 using EventSystem.Domain.Commands.PointOfSaleCommands.Input;
 using EventSystem.Domain.Commands.PointOfSaleCommands.Output;
 using EventSystem.Domain.Entities;
 using EventSystem.Domain.Repositories;
 using EventSystem.Shared.Commands;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace EventSystem.Domain.Handlers
@@ -16,17 +20,22 @@ namespace EventSystem.Domain.Handlers
 
 		private readonly IUserRepository _userRepository;
 		private readonly IPointOfSaleRepository _pointOfSaleRepository;
+		private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ILogger<PointOfSaleHandler> _logger;
 		
-		public PointOfSaleHandler(IUserRepository userRepository, IPointOfSaleRepository pointOfSaleRepository, ILogger<PointOfSaleHandler> logger)
+		public PointOfSaleHandler(IUserRepository userRepository, IPointOfSaleRepository pointOfSaleRepository, ILogger<PointOfSaleHandler> logger, IHttpContextAccessor httpContextAccessor)
 		{
 			_userRepository = userRepository;
 			_pointOfSaleRepository = pointOfSaleRepository;
 			_logger = logger;
+			_httpContextAccessor = httpContextAccessor;
 		}
 		
 		public async Task<ICommandResult> Handle(CreatePointOfSaleCommand command)
 		{
+
+			var id = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sid).Value);
+			
 			//Verifica se o e-mail já está sendo utilizado
 			if(await _userRepository.GetUserByEmail(command.Email) != null)
 				AddNotification("email", "Este e-mail já está sendo utilizado");

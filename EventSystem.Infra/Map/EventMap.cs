@@ -27,6 +27,9 @@ namespace EventSystem.Infra.Map
 				.HasMany(e => e.PointOfSaleEvents)
 				.WithOne(pse => pse.Event);
 
+			builder
+				.HasOne(e => e.EventAdministrator)
+				.WithMany(ea => ea.Events);
 		}
 	}
 }

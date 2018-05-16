@@ -8,11 +8,13 @@ namespace EventSystem.Infra.Map
 	{
 		public void Configure(EntityTypeBuilder<EventAdministrator> builder)
 		{
-			
-			
 			builder
 				.HasOne(ea => ea.Administrator)
 				.WithMany(a => a.EventAdministrators);
+
+			builder
+				.HasMany(ea => ea.Events)
+				.WithOne(e => e.EventAdministrator);
 		}
 	}
 }

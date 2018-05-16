@@ -23,7 +23,7 @@ namespace EventSystem.Infra.Map
 				.HasColumnType("varchar(64)");
 
 			builder.Property(u => u.IsActive)
-				.HasDefaultValue(false);
+				.HasDefaultValue(true);
 			
 			builder.Property(u => u.IsDisabled)
 				.HasDefaultValue(false);

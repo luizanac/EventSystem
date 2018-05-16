@@ -9,10 +9,13 @@ using EventSystem.Infra.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
@@ -77,6 +80,9 @@ namespace EventSystem.Api
 			
 			#region Dependency Injection
 
+			services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
+			
 			#region Repositories
 
 			services.AddTransient(typeof(IRepository<>), typeof(Repository<>));

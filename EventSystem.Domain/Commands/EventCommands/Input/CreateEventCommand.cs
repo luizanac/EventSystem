@@ -17,6 +17,7 @@ namespace EventSystem.Domain.Commands.EventCommands.Input
 		public string Name { get; set; }
 		public string StartDate { get; set; }
 		public string EndDate { get; set; }
+		public Guid EventAdministratorId { get; set; }
 		public IFormFile Photo { get; set; }
 		
 		public bool IsValid()

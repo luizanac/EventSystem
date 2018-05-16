@@ -62,7 +62,7 @@ namespace EventSystem.Infra.Migrations
 
                     b.Property<DateTime>("EndDate");
 
-                    b.Property<Guid?>("EventAdministratorId");
+                    b.Property<Guid>("EventAdministratorId");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -211,9 +211,10 @@ namespace EventSystem.Infra.Migrations
 
             modelBuilder.Entity("EventSystem.Domain.Entities.Event", b =>
                 {
-                    b.HasOne("EventSystem.Domain.Entities.EventAdministrator")
+                    b.HasOne("EventSystem.Domain.Entities.EventAdministrator", "EventAdministrator")
                         .WithMany("Events")
-                        .HasForeignKey("EventAdministratorId");
+                        .HasForeignKey("EventAdministratorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("EventSystem.Domain.Entities.Payment", b =>

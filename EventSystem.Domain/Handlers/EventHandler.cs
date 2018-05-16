@@ -16,20 +16,30 @@ namespace EventSystem.Domain.Handlers
 	{
 
 		private readonly IEventRepository _eventRepository;
+		private readonly IEventAdministratorRepository _eventAdministratorRepository;
 		private readonly IPointOfSaleRepository _pointOfSaleRepository;
 		private readonly ILogger<EventHandler> _logger;
 		
 		public EventHandler(
 			IEventRepository eventRepository, 
-			IPointOfSaleRepository pointOfSaleRepository, ILogger<EventHandler> logger)
+			IPointOfSaleRepository pointOfSaleRepository, ILogger<EventHandler> logger, IEventAdministratorRepository eventAdministratorRepository)
 		{
 			_eventRepository = eventRepository;
 			_pointOfSaleRepository = pointOfSaleRepository;
 			_logger = logger;
+			_eventAdministratorRepository = eventAdministratorRepository;
 		}
 		
 		public async Task<ICommandResult> Handle(CreateEventCommand command)
 		{
+
+			var eventAdministrator = await _eventAdministratorRepository.GetById(command.EventAdministratorId);
+			if (eventAdministrator != null)
+			{
+				AddNotification("eventAdministratorId", "Administrador de evento deve ser uma referencia válida!");
+				return null;
+			}
+			
 			// Valida o command
 			if (!command.IsValid())
 			{

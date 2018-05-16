@@ -38,6 +38,9 @@ namespace EventSystem.Domain.Entities
 		public DateTime EndDate { get; set; }
 		public string Photo { get; set; }
 		
+		public Guid EventAdministratorId { get; set; }
+		public virtual EventAdministrator EventAdministrator { get; set; }
+		
 		public virtual IList<PointOfSaleEvent> PointOfSaleEvents { get; set; }
 
 		//Adiciona um ponto de venda ao evento

@@ -38,5 +38,13 @@ namespace EventSystem.Infra.Repositories
 		
 		public EventAdministratorRepository(AppDbContext dbContext) : base(dbContext)
 		{}
+		
+		public override async Task<EventAdministrator> GetById(Guid id)
+		{
+			return await DbContext
+				.EventAdministrators
+				.Include(ea => ea.Events)
+				.FirstOrDefaultAsync(e => e.Id == id);
+		}
 	}
 }

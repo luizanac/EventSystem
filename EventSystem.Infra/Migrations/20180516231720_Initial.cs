@@ -59,7 +59,7 @@ namespace EventSystem.Infra.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    EventAdministratorId = table.Column<Guid>(nullable: true),
+                    EventAdministratorId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(type: "varchar(50)", nullable: false),
                     Photo = table.Column<string>(type: "varchar(50)", nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false)
@@ -72,7 +72,7 @@ namespace EventSystem.Infra.Migrations
                         column: x => x.EventAdministratorId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

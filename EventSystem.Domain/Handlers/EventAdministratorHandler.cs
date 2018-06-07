@@ -40,12 +40,9 @@ namespace EventSystem.Domain.Handlers
 			if(await _userRepository.GetUserByEmail(command.Email) != null)
 				AddNotification("email", "Este e-mail já está sendo utilizado");
 
-			var eventAdministrator = new EventAdministrator
+			var eventAdministrator = new EventAdministrator(command.Name, command.Email, command.Password)
 			{
 				AdministratorId = administratorId,
-				Name = command.Name,
-				Email = command.Email,
-				Password = command.Password
 			};
 			
 			AddNotifications(eventAdministrator.Notifications);
